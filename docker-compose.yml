@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  tradebot:
+    build: .
+    container_name: tradebot_platform
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+
+  # برای استفاده از Postgres به جای SQLite، این سرویس را فعال و DATABASE_URL را در .env تنظیم کنید:
+  # postgres:
+  #   image: postgres:16-alpine
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_DB: tradebot
+  #     POSTGRES_USER: tradebot
+  #     POSTGRES_PASSWORD: change-me
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+# volumes:
+#   pgdata:
